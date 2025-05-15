@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ansari Atifa | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+</head>
+<style>
+    body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f8f9fa;
+  color: #333;
+}
+
+header {
+  background: #1e1e1e;
+  padding: 1rem 0;
+  color: white;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+#hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #e2e8f0;
+}
+
+.btn {
+  background: #1e1e1e;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+section {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skill {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.skill i {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.skill:hover {
+  transform: scale(1.05);
+}
+
+.project-card {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 5px solid #1e1e1e;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input, form textarea {
+  margin-bottom: 1rem;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  background: #1e1e1e;
+  color: white;
+  padding: 0.7rem;
+  border: none;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1e1e1e;
+  color: white;
+}
+.resume-download {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.resume-download .btn {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.resume-download .btn:hover {
+  background-color: #444;
+}
+#contact a {
+  color: #1e1e1e;
+  text-decoration: none;
+}
+
+#contact a:hover {
+  text-decoration: underline;
+}
+
+form button i {
+  margin-right: 5px;
+}
+
+
+
+</style>
+<body>
+  <header>
+    <div class="container">
+      <h1>Ansari    Atifa</h1>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="resume-download" data-aos="fade-up">
+        <a href="assets/Your_Resume.pdf" download class="btn">
+          <i class="fas fa-download"></i> Download My Resume
+        </a>
+      </div>
+      
+  </header>
+
+  <section id="hero">
+    <h2>Hello, I'm <span class="typewriter"></span></h2>
+    <p>A passionate front-end developer building cool stuff.</p>
+    <a href="#projects" class="btn">See My Work</a>
+  </section>
+
+  <section id="about" data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>I love coding and crafting beautiful web experiences. I specialize in HTML, CSS, and JavaScript with experience in React and Git.</p>
+    <p>
+        I am a dedicated and detail-oriented technology enthusiast with a strong foundation in software development, data handling, and network systems. My technical proficiency includes programming languages such as C++, Java, Python, and JavaScript frameworks like React. I also have experience working with relational databases using SQL/MySQL and performing data analysis through R programming. In addition to software development, I possess a growing interest in Networking and the Internet of Things (IoT), where I enjoy exploring how connected systems can drive innovation. I am continually seeking opportunities to learn, grow, and contribute to impactful projects in the tech industry.
+      </p>   
+</section>
+
+  <section id="skills" data-aos="fade-up">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill"><i class="fas fa-code"></i> C++</div>
+      <div class="skill"><i class="fab fa-java"></i> Java</div>
+      <div class="skill"><i class="fab fa-react"></i> React</div>
+      <div class="skill"><i class="fab fa-python"></i> Python</div>
+      <div class="skill"><i class="fas fa-project-diagram"></i> R Programming</div>
+      <div class="skill"><i class="fas fa-database"></i> SQL / MySQL</div>
+      <div class="skill"><i class="fas fa-network-wired"></i> Networking</div>
+      <div class="skill"><i class="fas fa-microchip"></i> IoT</div>
+    </div>
+  </section>
+
+  <section id="projects" data-aos="fade-up">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Portfolio Website</h3>
+      <p>My personal site built with HTML, CSS, and JavaScript.</p>
+      <a href="#" target="_blank">Live Demo</a>
+    </div>
+    <div class="project-card">
+      <h3>To-Do App</h3>
+      <p>A clean to-do list with localStorage support.</p>
+      <a href="#" target="_blank">View Project</a>
+    </div>
+    <div class="project-card">
+        <h3>Image Gallery</h3>
+        <p>
+          A responsive image gallery built using HTML, CSS, and JavaScript. It showcases images in a grid format with clean design and interactive layout.
+        </p>
+        <p><strong>Status:</strong> Code Ready – Live Demo Coming Soon</p>
+      </div>
+    
+      <div class="project-card">
+        <h3>Calculator</h3>
+        <p>
+          A basic calculator web app developed with HTML, CSS, and JavaScript. It supports basic arithmetic operations and has a user-friendly interface.
+        </p>
+        <p><strong>Status:</strong> Code Ready – Live Demo Coming Soon</p>
+      </div>
+    
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <h2>Contact Me</h2>
+  
+    <p>You can reach out to me via email or connect with me on LinkedIn and GitHub.</p>
+  
+    <p>
+      <strong>Email:</strong> <a href="mailto:ansariatifa932@gmail.com">ansariatifa932@gmail.com</a><br>
+      <strong>GitHub:</strong> <a href="https://github.com/Ansari Atifa Khatoon " target="_blank"><i class="fab fa-github"></i> github.com/Ansari Atifa Khatoon</a><br>
+      <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/yourusername</a>
+    </p>
+  
+    <h3>Or Send Me a Message:</h3>
+    <form action="https://formspree.io/f/YOUR_ID" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </form>
+  </section>
+  
+  <footer>
+    <p>© 2025 Ansari Atifa | Built with ❤️</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  <script>
+    // Typewriter Effect
+const words = ["a Developer", "a Designer", "a Problem Solver"];
+let i = 0, timer;
+
+function typingEffect() {
+  let word = words[i].split("");
+  let loopTyping = function () {
+    if (word.length > 0) {
+      document.querySelector(".typewriter").innerHTML += word.shift();
+    } else {
+      deletingEffect();
+      return;
+    }
+    timer = setTimeout(loopTyping, 150);
+  };
+  loopTyping();
+}
+
+function deletingEffect() {
+  let word = words[i].split("");
+  let loopDeleting = function () {
+    if (word.length > 0) {
+      word.pop();
+      document.querySelector(".typewriter").innerHTML = word.join("");
+    } else {
+      i = (i + 1) % words.length;
+      typingEffect();
+      return;
+    }
+    timer = setTimeout(loopDeleting, 100);
+  };
+  loopDeleting();
+}
+
+typingEffect();
+
+  </script>
+</body>
+</html>

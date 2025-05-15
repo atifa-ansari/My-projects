@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <style>
+    body {
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    .calculator {
+      width: 320px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    #display {
+      width: 100%;
+      height: 50px;
+      font-size: 24px;
+      margin-bottom: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: right;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    #advanced-buttons {
+      display: none;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      height: 50px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background: #eee;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #ddd;
+    }
+    .operator {
+      background: #ffc107;
+    }
+    .operator:hover {
+      background: #e0a800;
+    }
+    .equal {
+      background: #28a745;
+      color: #fff;
+    }
+    .equal:hover {
+      background: #218838;
+    }
+    body.dark-mode {
+      background: #121212;
+      color: #eee;
+    }
+    body.dark-mode .calculator {
+      background: #1e1e1e;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    }
+    body.dark-mode input, body.dark-mode button {
+      background: #333;
+      color: #fff;
+    }
+    #history {
+      font-size: 14px;
+      margin-top: 10px;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <div style="text-align:right; margin-bottom: 10px;">
+    <label>
+      <input type="checkbox" id="toggle-dark" onchange="toggleDarkMode()"> Dark Mode
+    </label>
+  </div>
+
+  <input type="text" id="display" disabled />
+
+  <div class="buttons">
+    <button onclick="press('7')">7</button>
+    <button onclick="press('8')">8</button>
+    <button onclick="press('9')">9</button>
+    <button onclick="press('/')" class="operator">/</button>
+    <button onclick="clearDisplay()">C</button>
+
+    <button onclick="press('4')">4</button>
+    <button onclick="press('5')">5</button>
+    <button onclick="press('6')">6</button>
+    <button onclick="press('*')" class="operator">*</button>
+    <button onclick="backspace()">←</button>
+
+    <button onclick="press('1')">1</button>
+    <button onclick="press('2')">2</button>
+    <button onclick="press('3')">3</button>
+    <button onclick="press('-')" class="operator">-</button>
+    <button onclick="press('(')">(</button>
+
+    <button onclick="press('0')">0</button>
+    <button onclick="press('.')">.</button>
+    <button onclick="calculate()" class="equal">=</button>
+    <button onclick="press('+')" class="operator">+</button>
+    <button onclick="press(')')">)</button>
+
+    <button onclick="square()">x²</button>
+    <button onclick="sqrt()">√</button>
+    <button onclick="percent()">%</button>
+    <button onclick="power()">xʸ</button>
+    <button onclick="reciprocal()">1/x</button>
+  </div>
+
+  <!-- Toggle Button -->
+  <button id="toggle-advanced-btn" onclick="toggleAdvanced()" style="margin: 10px 0;">▼</button>
+
+
+  <!-- Advanced Buttons (Initially Hidden) -->
+  <div id="advanced-buttons" class="buttons">
+    <button onclick="addTrig('sin')">sin</button>
+    <button onclick="addTrig('cos')">cos</button>
+    <button onclick="addTrig('tan')">tan</button>
+    <button onclick="addTrig('asin')">sin⁻¹</button>
+    <button onclick="addTrig('acos')">cos⁻¹</button>
+
+    <button onclick="addTrig('atan')">tan⁻¹</button>
+    <button onclick="log10()">log</button>
+    <button onclick="ln()">ln</button>
+    <button onclick="addConstant('pi')">π</button>
+    <button onclick="addConstant('e')">e</button>
+
+    <button onclick="factorial()">x!</button>
+  </div>
+
+  <h3>History</h3>
+  <button onclick="clearHistory()" style="margin-bottom:10px;">Clear History</button>
+  <ul id="history"></ul>
+</div>
+
+<script>
+let expression = '';
+let history = [];
+
+function updateDisplay() {
+  document.getElementById('display').value = expression;
+}
+
+function clearDisplay() {
+  expression = '';
+  updateDisplay();
+}
+
+function backspace() {
+  expression = expression.slice(0, -1);
+  updateDisplay();
+}
+
+function press(val) {
+  expression += val;
+  updateDisplay();
+}
+
+function calculate() {
+  try {
+    let result = eval(expression);
+    if (result === Infinity || isNaN(result)) throw new Error("Invalid");
+    addToHistory(expression + " = " + result);
+    expression = result.toString();
+    updateDisplay();
+  } catch {
+    expression = '';
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function square() {
+  try {
+    let num = eval(expression);
+    expression = (num * num).toString();
+    addToHistory(`(${num})² = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function sqrt() {
+  try {
+    let num = eval(expression);
+    if (num < 0) throw new Error();
+    expression = Math.sqrt(num).toString();
+    addToHistory(`√(${num}) = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function percent() {
+  try {
+    let num = eval(expression);
+    expression = (num / 100).toString();
+    addToHistory(`${num}% = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function power() {
+  expression += '**';
+  updateDisplay();
+}
+
+function reciprocal() {
+  try {
+    let num = eval(expression);
+    expression = (1 / num).toString();
+    addToHistory(`1/(${num}) = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function addTrig(func) {
+  try {
+    let num = eval(expression);
+    let result;
+    switch(func) {
+      case 'sin': result = Math.sin(num); break;
+      case 'cos': result = Math.cos(num); break;
+      case 'tan': result = Math.tan(num); break;
+      case 'asin': result = Math.asin(num); break;
+      case 'acos': result = Math.acos(num); break;
+      case 'atan': result = Math.atan(num); break;
+    }
+    expression = result.toString();
+    addToHistory(`${func}(${num}) = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function log10() {
+  try {
+    let num = eval(expression);
+    expression = Math.log10(num).toString();
+    addToHistory(`log(${num}) = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function ln() {
+  try {
+    let num = eval(expression);
+    expression = Math.log(num).toString();
+    addToHistory(`ln(${num}) = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function addConstant(constant) {
+  if (constant === 'pi') {
+    expression += Math.PI;
+  } else if (constant === 'e') {
+    expression += Math.E;
+  }
+  updateDisplay();
+}
+
+function factorial() {
+  try {
+    let num = eval(expression);
+    let result = 1;
+    for (let i = 1; i <= num; i++) {
+      result *= i;
+    }
+    expression = result.toString();
+    addToHistory(`${num}! = ${expression}`);
+    updateDisplay();
+  } catch {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+function addToHistory(entry) {
+  history.push(entry);
+  const historyList = document.getElementById('history');
+  const item = document.createElement('li');
+  item.textContent = entry;
+  historyList.appendChild(item);
+}
+
+function clearHistory() {
+  history = [];
+  document.getElementById('history').innerHTML = '';
+}
+
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+}
+
+function toggleAdvanced() {
+  const adv = document.getElementById('advanced-buttons');
+  const btn = document.getElementById('toggle-advanced-btn');
+  
+  if (adv.style.display === 'none') {
+    adv.style.display = 'grid';
+    btn.textContent = '▲'; // Collapse icon
+  } else {
+    adv.style.display = 'none';
+    btn.textContent = '▼'; // Expand icon
+  }
+}
+
+</script>
+
+</body>
+</html>
